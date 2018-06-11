@@ -12,9 +12,13 @@ public class PushService {
 
     PackageReceiver packageReceiver = new PackageReceiver();
 
-    public void push() throws InterruptedException {
+    public void push() {
         System.out.println("before push. ");
-        TimeUnit.SECONDS.sleep(20);
+        try {
+            TimeUnit.SECONDS.sleep(20);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         System.out.println("push ok. ");
         packageReceiver.receive();
     }

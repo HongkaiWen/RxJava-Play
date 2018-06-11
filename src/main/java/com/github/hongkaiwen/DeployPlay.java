@@ -14,6 +14,8 @@ public class DeployPlay {
 
     public static void main(String args[]) throws InterruptedException {
         jenkinsClient.createJob();
+        System.out.println("start deploy... running in backend... ");
+        System.out.println("jenkins in queuing ...");
         TimeUnit.SECONDS.sleep(60);
     }
 

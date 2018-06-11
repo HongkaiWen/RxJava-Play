@@ -8,8 +8,12 @@ import java.util.concurrent.TimeUnit;
  **/
 public class PackageService {
 
-    public void preparePkg() throws InterruptedException {
-        TimeUnit.SECONDS.sleep(1);
+    public void preparePkg(){
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         System.out.println("package prepare ok.");
     }
 

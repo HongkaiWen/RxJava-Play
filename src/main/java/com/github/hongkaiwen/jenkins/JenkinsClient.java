@@ -27,12 +27,13 @@ public class JenkinsClient {
                 jenkinsCallBack.buildNumber((long) n);
                 //模拟构建
                 TimeUnit.SECONDS.sleep(10);
-                System.out.println("create jenkins job success");
+                System.out.println("jenkins: create jenkins job success");
 
                 int i = new Random().nextInt(1) + 1;
 
                 //模拟随机结果
                 jenkinsCallBack.buildResult(i/2 == 0);
+                System.out.println("jenkins: send build result ok. ");
             }catch(Exception e){
 
             }
