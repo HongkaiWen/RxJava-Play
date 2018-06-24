@@ -1,7 +1,12 @@
 package com.github.hongkaiwen.service;
 
 import com.github.hongkaiwen.dao.RxDao;
+import com.github.hongkaiwen.domain.Student;
+import io.reactivex.Maybe;
 import io.reactivex.Observable;
+import io.reactivex.schedulers.Schedulers;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author hongkai
@@ -11,15 +16,26 @@ public class RxService {
 
     private RxDao rxDao = new RxDao();
 
-    public void addScore4Student(String name) throws InterruptedException {
+    public void studentScoreCaculate(String name) throws InterruptedException {
         rxDao.getByName(name)
-                .map(student -> {
-                    student.setScore(student.getScore() + 1);
-                    return student;
-                })
+                .subscribeOn(Schedulers.io())
+                .flatMap(student -> caculateScore(student))
                 .subscribe(student ->
                         rxDao.save(student).andThen(Observable.just("success saved."))
                                 .subscribe(System.out::println));
+    }
+
+    /**
+     * 学生成绩计算
+     *
+     * @param student
+     * @return
+     * @throws InterruptedException
+     */
+    private Maybe<Student> caculateScore(Student student) throws InterruptedException {
+        TimeUnit.SECONDS.sleep(5);
+        student.setScore(100);
+        return Maybe.just(student);
     }
 
 }

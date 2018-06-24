@@ -23,9 +23,9 @@ public class H {
 
         RxService rxService = new RxService();
 
-        rxService.addScore4Student("Zhangsan");
+        rxService.studentScoreCaculate("Zhangsan");
 
-
+        TimeUnit.SECONDS.sleep(10);
 
     }
 

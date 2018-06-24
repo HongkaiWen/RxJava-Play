@@ -45,6 +45,7 @@ public class RxDao {
     public Completable save(Student student) throws InterruptedException {
         TimeUnit.SECONDS.sleep(3);
         log.info("saved student: {}", student);
+        System.out.println("save: " + student);
         return Completable.complete();
     }
 
