@@ -1,7 +1,10 @@
 package com.github.hongkaiwen;
 
-import io.reactivex.Flowable;
-import io.reactivex.schedulers.Schedulers;
+import com.github.hongkaiwen.service.RxService;
+import io.reactivex.Observable;
+import io.reactivex.ObservableOnSubscribe;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author hongkai
@@ -9,22 +12,21 @@ import io.reactivex.schedulers.Schedulers;
  **/
 public class H {
 
-    public static void main(String args[]){
-        Flowable.range(1, 2)
-                .map(v ->
-                        Flowable.just(v)
-                                .subscribeOn(Schedulers.computation())
-                                .map(w -> w * w)
-                )
-                .blockingSubscribe(System.out::println);
+    public static void main(String args[]) throws InterruptedException {
+        Observable.create((ObservableOnSubscribe<String>)
+                emitter -> Observable.interval(1, TimeUnit.SECONDS)
+                        .take(5)
+                        .map(String::valueOf)
+                        .subscribe(emitter::onNext)).subscribe(System.out::println);
 
-        Flowable.range(1, 2)
-                .flatMap(v ->
-                        Flowable.just(v)
-                                .subscribeOn(Schedulers.computation())
-                                .map(w -> w * w)
-                )
-                .blockingSubscribe(System.out::println);
+
+
+        RxService rxService = new RxService();
+
+        rxService.addScore4Student("Zhangsan");
+
+
+
     }
 
 }
