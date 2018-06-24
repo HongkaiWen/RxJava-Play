@@ -11,8 +11,8 @@ import java.util.concurrent.TimeUnit;
 public class ThreadPoolHolder {
 
     public static ThreadPoolExecutor pool =
-            new ThreadPoolExecutor(30,
-                    30,
+            new ThreadPoolExecutor(300,
+                    300,
                     0L,
                     TimeUnit.SECONDS,
                     new LinkedBlockingDeque<>(100000));

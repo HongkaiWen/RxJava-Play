@@ -1,12 +1,7 @@
 package com.github.hongkaiwen;
 
-import io.reactivex.BackpressureStrategy;
 import io.reactivex.Flowable;
-import io.reactivex.FlowableEmitter;
-import io.reactivex.FlowableOnSubscribe;
 import io.reactivex.schedulers.Schedulers;
-
-import java.util.stream.Stream;
 
 /**
  * @author hongkai
@@ -27,12 +22,13 @@ public class Play {
                 .subscribe(System.out::println, Throwable::printStackTrace);
 
         Flowable.range(1, 10)
-                .flatMap(v ->
+                .map(v ->
                         Flowable.just(v)
                                 .subscribeOn(Schedulers.computation())
                                 .map(w -> w * w)
                 )
                 .blockingSubscribe(System.out::println);
+
 
         Flowable.just("hi").subscribe(System.out::println);
 
